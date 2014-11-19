@@ -3,8 +3,8 @@
 zname <- "getdata_projectfiles_UCI HAR Dataset.zip"
 if (!file.exists(zname))
 	print("Zip file with dataset does not exist")
-else
-	unzip(zname)
+
+unzip(zname)
 
 ## Read in the test data, starting with the student ids
 y <- file("UCI HAR Dataset/test/subject_test.txt", "r")
@@ -175,7 +175,7 @@ names(dt) <- cnames
 
 ## Write the output to file, as a txt file. The output file is called average_measurement_values.txt
 
-write.table(dt,"average_measurement_values.txt", row.names = FALSE)
+write.table(dt,"average_measurement_values.txt", row.names = FALSE, sep="\t")
 
 
 
