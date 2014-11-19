@@ -26,11 +26,16 @@ To change the values in the activity column from numeric values to descriptive n
 
 ## Part 4 - Labelling the data set with descriptive variable names
 To change the column names from generic values to descriptive variable names, the script transforms the set of feature variable names that had already been read in part 2. The following transformations are performed on the names:  
-1. Remove non-alphabetic characters
-2. Move "mean" and "std" to the end of the name
-3. Replace X/Y/Z by Xaxis/Yaxis/Zaxis
-4. Replace "tBody" by "timeBody", "tGravity" by "timeGravity" and "fBody" by "freqBody"
-5. Replace "BodyBody" by "Body"
+
+- Remove non-alphabetic characters
+
+- Move "mean" and "std" to the end of the name
+
+- Replace X/Y/Z by Xaxis/Yaxis/Zaxis
+
+- Replace "tBody" by "timeBody", "tGravity" by "timeGravity" and "fBody" by "freqBody"
+
+- Replace "BodyBody" by "Body"
 
 The name of the first column in the data set is set of "Subject", the name of the second column is set of "Activity", while the transformed feature variable names are used as descriptive names for the other 66 columns.
 
