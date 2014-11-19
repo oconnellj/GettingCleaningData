@@ -1,6 +1,10 @@
 
-## Unzip the input data
-unzip("getdata_projectfiles_UCI HAR Dataset.zip")
+## Unzip the input data which should be in the local directory
+zname <- "getdata_projectfiles_UCI HAR Dataset.zip"
+if (!file.exists(zname))
+	print("Zip file with dataset does not exist")
+else
+	unzip(zname)
 
 ## Read in the test data, starting with the student ids
 y <- file("UCI HAR Dataset/test/subject_test.txt", "r")
@@ -106,9 +110,30 @@ for (i in 1:nrow(dataset)) {
 	dataset[i,2] <- as.character(activityLabels[j,"V2"])
 	}
 
-## Part 4 - Set the names of the column variables, using the names that were read from features.txt file
+## Part 4 - Set the names of the column variables to descriptive names.
+## Descriptive names are derived from the names that were read from 
+## features.txt file, by removing non-alphabetic characters, by replacing
+## X/Y/Z by Xaxis/Yaxis/Zaxis, by moving "Mean" or "Std" to the end
+## of the name, by replacing tBody by triBody, by replacing fBody by 
+## freqBody and by replacing BodyBody by Body.
 
 cnames <- c("Subject", "Activity", as.character(toExtract[,2]))
+for (i in 1:length(cnames)) {
+	s <- as.character(cnames[i])
+	s <- sub("-mean\\(\\)-X","XaxisMean",s)
+	s <- sub("-mean\\(\\)-Y","YaxisMean",s)
+	s <- sub("-mean\\(\\)-Z","ZaxisMean",s)
+	s <- sub("-std\\(\\)-X","XaxisStd",s)
+	s <- sub("-std\\(\\)-Y","YaxisStd",s)
+	s <- sub("-std\\(\\)-Z","ZaxisStd",s)
+	s <- sub("-mean\\(\\)","Mean",s)
+	s <- sub("-std\\(\\)","Std",s)
+	s <- sub("tBody","timeBody",s)
+	s <- sub("tGravity","timeGravity",s)
+	s <- sub("fBody","freqBody",s)
+	s <- sub("BodyBody","Body",s)
+	cnames[i] <- s
+	}
 names(dataset) <- cnames
 
 ## Part 5 - Create a new tidy data set that gives the average
